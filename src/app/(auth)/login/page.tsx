@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from "react";
 import { useFormState, useFormStatus } from "react-dom";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
@@ -11,8 +12,23 @@ import { signInAction, type AuthActionState } from "@/app/(auth)/actions";
 const initialState: AuthActionState = {};
 
 export default function LoginPage() {
+  return (
+    <Suspense
+      fallback={
+        <GlassCard className="p-8 sm:p-10">
+          <p className="text-center text-moonlight-300">Loading...</p>
+        </GlassCard>
+      }
+    >
+      <LoginForm />
+    </Suspense>
+  );
+}
+
+function LoginForm() {
   const [state, formAction] = useFormState(signInAction, initialState);
-  const redirectTo = useSearchParams().get("redirectTo") ?? "/dashboard";
+  const searchParams = useSearchParams();
+  const redirectTo = searchParams.get("redirectTo") ?? "/dashboard";
 
   return (
     <GlassCard className="p-8 sm:p-10">
