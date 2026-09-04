@@ -1,5 +1,3 @@
-"use client";
-
 import { ButtonHTMLAttributes, forwardRef } from "react";
 import { cn } from "@/lib/utils";
 
@@ -26,10 +24,6 @@ const sizes: Record<string, string> = {
   lg: "text-lg px-8 py-4 rounded-full",
 };
 
-/**
- * Returns the same visual classes as <Button/> for use on non-button
- * elements (e.g. Next.js <Link>) so links and buttons can share one look.
- */
 export function buttonClasses({
   variant = "primary",
   size = "md",
